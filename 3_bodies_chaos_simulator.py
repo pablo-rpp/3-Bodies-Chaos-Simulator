@@ -467,6 +467,8 @@ def Bosco():
         y1_n[2] += (h/6)*(k1_12 + 2*(k2_12 + k3_12) + k4_12)
         y2_n[2] += (h/6)*(k1_22 + 2*(k2_22 + k3_22) + k4_22)
 
+        ## WARNING: No habría que actualizar las distancias n_xy??
+
         g.write(str(y0_n[0]) + ',' + str(y0_n[1])+ ','+ str(y0_n[2])+ ';')
         g.write(str(y1_n[0]) + ',' + str(y1_n[1])+ ','+ str(y1_n[2])+ ';')
         g.write(str(y2_n[0]) + ',' + str(y2_n[1])+ ','+ str(y2_n[2])+ '\n')
