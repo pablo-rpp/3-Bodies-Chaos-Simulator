@@ -45,8 +45,9 @@ class rungeKutta():
 
     def lCalculus(self, index, increment):
         for i in range(3):
+
             self.bodies[i].l[index] = self.bodies[i].derivateMomentum(
-                self.bodies[moduli(i+1, 3)], self.bodies[moduli(i+2, 3)], increment[i])
+                self.bodies[moduli(i+1, 3)], self.bodies[moduli(i+2, 3)], increment[index, i])
 
     def rkMomentum(self):
         for i in range(3):
@@ -55,7 +56,7 @@ class rungeKutta():
                                     + self.bodies[i].l[3])
 
     def rkLocation(self):
-        for i in ragen(3):
-            self.bodies[i].momentum += (self.h/6)*(self.bodies[i].k[0]
+        for i in range(3):
+            self.bodies[i].location += (self.h/6)*(self.bodies[i].k[0]
                                     + 2*(self.bodies[i].k[1] + self.bodies[i].k[2] )
                                     + self.bodies[i].k[3])

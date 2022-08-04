@@ -1,4 +1,3 @@
-
 import numpy as np
 from math import pow
 
@@ -26,25 +25,26 @@ class Body():
 
     global G ## WARNING: no se si estoy funciona bien...
 
-    k = np.array([[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]])
-    l = np.array([[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]])
+    k = np.array([[0., 0., 0.], [0., 0., 0.], [0., 0., 0.], [0., 0., 0.]])
+    l = np.array([[0., 0., 0.], [0., 0., 0.], [0., 0., 0.], [0., 0., 0.]])
 
     def __init__(self, location, momentum, mass):
         self.location = location
         self.momentum = momentum
         self.mass = mass
 
-    def distance(self, body):
+    def distance(self, body, increment):
         #Aquí la distancia está planteada como un elemento dinámico
         #esto puede dar errores en las colisiones???
-        return pow(np.inner(self.location, body.location))
+        return pow(np.inner(self.location-body.location+increment,
+                            self.location-body.location + increment), (-3/2))
 
     #Lo de incremento hay que revisarlo
     def derivatePosition(self, increment):
         return (self.momentum + increment)/self.mass
 
     def gForceInteractions(self, body, increment):
-        return -G*self.mass*body.mass*(self.location + increment - body.location)*self.distance(body)
+        return -G*self.mass*body.mass*(self.location + increment - body.location)*self.distance(body, increment)
 
     def derivateMomentum(self, body1, body2, increment):
-        return self.gForceInteractions(self, body1, increment) + self.gForceInteractions(self, body2, increment)
+        return self.gForceInteractions(body1, increment) + self.gForceInteractions(body2, increment)
