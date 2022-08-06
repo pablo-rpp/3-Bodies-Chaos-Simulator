@@ -23,21 +23,23 @@ class Body():
     derivateMomentum :
     """
 
+
     global G ## WARNING: no se si estoy funciona bien...
 
-    k = np.array([[0., 0., 0.], [0., 0., 0.], [0., 0., 0.], [0., 0., 0.]])
-    l = np.array([[0., 0., 0.], [0., 0., 0.], [0., 0., 0.], [0., 0., 0.]])
+
 
     def __init__(self, location, momentum, mass):
         self.location = location
         self.momentum = momentum
         self.mass = mass
+        self.k = np.zeros((4, 3))
+        self.l = np.zeros((4, 3))
 
     def distance(self, body, increment):
         #Aquí la distancia está planteada como un elemento dinámico
         #esto puede dar errores en las colisiones???
-        return pow(np.inner(self.location-body.location+increment,
-                            self.location-body.location + increment), (-3/2))
+        return np.inner(self.location - body.location + increment,
+                            self.location - body.location + increment)**(-3/2)
 
     #Lo de incremento hay que revisarlo
     def derivatePosition(self, increment):

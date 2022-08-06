@@ -32,25 +32,32 @@ class rungeKutta():
         # wrappedK contiene (k1DeCadaCuerpo, k2DeCadaCuerpo, k3DeCadaCuerpo, k4DeCadaCuerpo)
         # Wrap both kinf of coefficients
 
-        self.wrappedK = np.append(self.bodies[0].k, self.bodies[1].k, axis=0)
-        self.wrappedK = np.append(self.wrappedK, self.bodies[2].k, axis=0)
+        self.wrappedK = np.zeros((4, 3, 3))
+        self.wrappedL = np.zeros((4, 3, 3))
 
-        self.wrappedL = np.append(self.bodies[0].l, self.bodies[1].l, axis=0)
-        self.wrappedL = np.append(self.wrappedL, self.bodies[2].l, axis=0)
+        for index in range(4):
+            for b in range(3):
+                self.wrappedK[index, b] = self.bodies[b].k[index]
+                self.wrappedL[index, b] = self.bodies[b].l[index]
 
 
-    def kCalculus(self, index, increment):
+
+    def kCalculus(self, index, increment): # WARNING: Aquí falla algo
+#        TestList = [] #Test
         for i in range(3):
-            self.bodies[i].k[index] = self.bodies[i].derivatePosition(increment[index, i])
+            self.bodies[i].k[index] = self.bodies[i].derivatePosition(increment[index][i])
+#            TestList.append(self.bodies[i].k[index]) #Test
+        #print(TestList)
+#        return TestList #Test
 
     def lCalculus(self, index, increment):
         for i in range(3):
-
             self.bodies[i].l[index] = self.bodies[i].derivateMomentum(
-                self.bodies[moduli(i+1, 3)], self.bodies[moduli(i+2, 3)], increment[index, i])
+                self.bodies[moduli(i+1, 3)], self.bodies[moduli(i+2, 3)], increment[index][i])
 
     def rkMomentum(self):
         for i in range(3):
+#
             self.bodies[i].momentum += (self.h/6)*(self.bodies[i].l[0]
                                     + 2*(self.bodies[i].l[1] + self.bodies[i].l[2] )
                                     + self.bodies[i].l[3])
