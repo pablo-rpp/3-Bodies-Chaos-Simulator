@@ -1,7 +1,16 @@
 import numpy as np
 
 def moduli(a, b):
+    """
+    moduli(a, b)
+    Take an element a in a class of Z/3Z and return the representative of the class.
 
+    Parameters
+    ----------
+    a: int
+
+
+    """
     if(a<b):
         return a
     else:
@@ -14,11 +23,32 @@ class rungeKutta():
 
     Attributes
     ----------
-
+    body1, body2, body3 : bodyClass.Body
+        Objects of the 3-body problem.
+    numIter: int
+        Number of iteratios to use in the numerical method.
+    initTime, finalTime: int
+        Both define the solution interval .
 
     Methods
     -------
 
+    wrapKL()
+        Give a proper structure to the Runge-Kutta coefficients.
+
+    kCalculus(index, increment)
+        Calculate the coefficients k with given index for every body. Increment respond
+        to the Runge-Kutta 4'th order formula.
+
+    lCalculus(index, increment)
+        Calculate the coefficients l with given index for every body. Increment respond
+        to the Runge-Kutta 4'th order formula.
+
+    rkMomentum()
+        Update the bodies momentum by Runge-Kutta method.
+
+    rkLocation()
+        Update the bodies position by Runge-Kutta method.
     """
 
     def __init__(self, body1, body2, body3, numIter, initTime, finalTime):
@@ -43,12 +73,8 @@ class rungeKutta():
 
 
     def kCalculus(self, index, increment): # WARNING: Aquí falla algo
-#        TestList = [] #Test
         for i in range(3):
             self.bodies[i].k[index] = self.bodies[i].derivatePosition(increment[index][i])
-#            TestList.append(self.bodies[i].k[index]) #Test
-        #print(TestList)
-#        return TestList #Test
 
     def lCalculus(self, index, increment):
         for i in range(3):
@@ -57,7 +83,6 @@ class rungeKutta():
 
     def rkMomentum(self):
         for i in range(3):
-#
             self.bodies[i].momentum += (self.h/6)*(self.bodies[i].l[0]
                                     + 2*(self.bodies[i].l[1] + self.bodies[i].l[2] )
                                     + self.bodies[i].l[3])

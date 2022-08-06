@@ -1,4 +1,3 @@
-
 from bodyClass import *
 from RKClass import *
 from brahma import *
@@ -37,9 +36,12 @@ del(p1, p2, p3, q1, q2, q3, mass, N, a, b)
 
 
 def Bosco():
+    """
+    This subroutine execute the Runge-Kutta method and saves the evolution of
+    the bodies position in space.
+    """
     global G
     nullIncrement = np.zeros((3, 3))
-
 
     try:
         os.mkdir('./Simulation_Data')
