@@ -52,7 +52,7 @@ def Brahma():
     ###############################################################################
 
     for i in range(3):
-        body = vp.sphere(pos = L*q0[i], make_trail = True, retain = 300,
+        body = vp.sphere(pos = q0[i], make_trail = True, retain = 300,
                 trail_radius = 2e8)
         body.radius = Rsun
         body.color = body.trail_color = body_colors[3+i]
@@ -74,10 +74,11 @@ def Brahma():
                 aux1.append(terna.split(','))
             ## NOTE: Actualización de posición
             try:
-                body.pos = L*vp.vec(float(aux1[i][0]), float(aux1[i][1]), float(aux1[i][2]))
+                #body.pos = L*vp.vec(float(aux1[i][0]), float(aux1[i][1]), float(aux1[i][2]))
+                body.pos = vp.vec(float(aux1[i][0]), float(aux1[i][1]), float(aux1[i][2]))
                 i+=1
             except:
-                print('Shit')
+                print('End')
                 return 0
 
     data.close()
