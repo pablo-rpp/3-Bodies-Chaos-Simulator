@@ -24,7 +24,7 @@ p2 = np.array([0, 0, 5E28])
 p3 = np.array([5E28, 0., 0.])
 
 #mass
-mass = [9E37, 7E20, 5E20]
+mass = [9E37, 7E25, 5E20]
 
 body1 = Body(q1, p1, mass[0])
 body2 = Body(q2, p2, mass[1])
@@ -70,18 +70,22 @@ def Bosco():
         RK.rkLocation()
         RK.rkMomentum()
 
+        file.write(str(RK.bodies[0].location[0]) + ',' + str(
+            RK.bodies[0].location[1]) + ',' + str(RK.bodies[0].location[2]) + ';')
+        file.write(str(RK.bodies[1].location[0]) + ',' + str(
+            RK.bodies[1].location[1]) + ',' + str(RK.bodies[1].location[2]) + ';')
+        file.write(str(RK.bodies[2].location[0]) + ',' + str(
+            RK.bodies[2].location[1]) + ',' + str(RK.bodies[2].location[2]) + '\n')
 
-
-        file.write(str(RK.bodies[0].location[0]) + ',' + str(RK.bodies[0].location[1])+ ','+ str(RK.bodies[0].location[2])+ ';')
-        file.write(str(RK.bodies[1].location[0]) + ',' + str(RK.bodies[1].location[1])+ ','+ str(RK.bodies[1].location[2])+ ';')
-        file.write(str(RK.bodies[2].location[0]) + ',' + str(RK.bodies[2].location[1])+ ','+ str(RK.bodies[2].location[2])+ '\n')
-
-
-        fileAux.write(str(RK.bodies[0].momentum[0]) + ',' + str(RK.bodies[0].momentum[1])+ ','+ str(RK.bodies[0].momentum[2])+ ';')
-        fileAux.write(str(RK.bodies[1].momentum[0]) + ',' + str(RK.bodies[1].momentum[1])+ ','+ str(RK.bodies[1].momentum[2])+ ';')
-        fileAux.write(str(RK.bodies[2].momentum[0]) + ',' + str(RK.bodies[2].momentum[1])+ ','+ str(RK.bodies[2].momentum[2])+ '\n')
+        fileAux.write(str(RK.bodies[0].momentum[0]) + ',' + str(
+            RK.bodies[0].momentum[1]) + ',' + str(RK.bodies[0].momentum[2]) + ';')
+        fileAux.write(str(RK.bodies[1].momentum[0]) + ',' + str(
+            RK.bodies[1].momentum[1]) + ',' + str(RK.bodies[1].momentum[2]) + ';')
+        fileAux.write(str(RK.bodies[2].momentum[0]) + ',' + str(
+            RK.bodies[2].momentum[1]) + ',' + str(RK.bodies[2].momentum[2]) + '\n')
 
     file.close()
+
 
 Bosco()
 
